@@ -10,6 +10,7 @@ def menu(saldo):
         [1]- Depósito
         [2]- Saque
         [3]- Extrato
+        [4]- Cadastro de Usuário
         [0]- Sair
 
     """.format(saldo=saldo))
@@ -55,6 +56,19 @@ def exibir(saldo, /, *, extrato):
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("\n===============================================")
 
+def cadastro(usuario):
+    endereco = []
+    nome = input("Digite seu nome: ")
+    data = input("Digite a data do seu nascimento: ")
+    cpf = int(input("Digite seu CPF: "))
+    logradouro = input("Digite seu Logradouro:")
+    bairro = input("Digite seu bairro:")
+    uf = input("Digite sua UF:")
+    cidade = input("Digite sua cidade:")
+    endereco.append([logradouro, bairro, uf, cidade])
+    usuario.append((nome, data, cpf, endereco))
+    return usuario
+
 def main():
     selecionar = int
     saldo = float(0)
@@ -62,6 +76,7 @@ def main():
     qtd_saques = 0
     LIMITE_SAQUES = 3
     extrato = ""
+    usuario=[]
 
     while True:
 
@@ -114,6 +129,9 @@ def main():
 
             if selecionar == "0":
                 break
+
+        elif selecionar == "4":
+            cadastro(usuario)
 
         elif selecionar == "0":
             break
