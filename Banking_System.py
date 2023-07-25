@@ -56,17 +56,22 @@ def exibir(saldo, /, *, extrato):
     print(f"\nSaldo: R$ {saldo:.2f}")
     print("\n===============================================")
 
+def confirm(cpf, usuario):
+    confirm_usu = [usuarios for usuarios in usuario if usuarios["cpf"] == cpf]
+    return confirm_usu[0] if confirm_usu else None
+
 def cadastro(usuario):
-    endereco = []
     nome = input("Digite seu nome: ")
-    data = input("Digite a data do seu nascimento: ")
     cpf = int(input("Digite seu CPF: "))
-    logradouro = input("Digite seu Logradouro:")
-    bairro = input("Digite seu bairro:")
-    uf = input("Digite sua UF:")
-    cidade = input("Digite sua cidade:")
-    endereco.append([logradouro, bairro, uf, cidade])
-    usuario.append((nome, data, cpf, endereco))
+    cad = confirm(cpf, usuario)
+    if cad:
+       print("CPF já cadastrado!")
+       return
+    data = input("Digite a data do seu nascimento: ")
+    endereco = input("Digite seu Endereço:")
+    usuario.append({"nome": nome, "data": data, "endereco": endereco, "cpf": cpf})
+
+    print("Cadastrado com Sucesso!")
     return usuario
 
 def main():
